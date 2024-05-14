@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.fesa.host.loginController">
+   <children>
+      <ImageView fitHeight="768" fitWidth="1024" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/loginScreen.png" />
+         </image>
+         <viewport>
+            <Rectangle2D height="768" width="1024" />
+         </viewport>
+      </ImageView>
+      <Pane layoutX="482.0" layoutY="154.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-radius: 50; -fx-background-radius: 50; -fx-pref-height: 450; -fx-pref-width: 475;">
+         <children>
+            <Label layoutX="198.0" layoutY="21.0" prefHeight="73.0" prefWidth="97.0" text="Login" textAlignment="CENTER" textFill="#5073b7">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtCPF" layoutX="50.0" layoutY="138.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-pref-width: 375; -fx-pref-height: 29;" />
+            <Label layoutX="55.0" layoutY="104.0" prefHeight="30.0" prefWidth="36.0" text="CPF" textFill="#5073b7">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="55.0" layoutY="207.0" prefHeight="30.0" prefWidth="63.0" text="Senha" textFill="#5073b7">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="55.0" layoutY="276.0" prefHeight="30.0" prefWidth="148.0" text="Esqueceu a senha?" textFill="#914bc3">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Button layoutX="107.0" layoutY="328.0" mnemonicParsing="false" onAction="#btEntrar" style="-fx-pref-width: 261; -fx-pref-height: 40; -fx-background-color: #914bc3; -fx-alignment: center;" text="Entrar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Label layoutX="191.0" layoutY="388.0" prefHeight="30.0" prefWidth="93.0" text="Cadastrar" textFill="#914bc3">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="txtSenha" layoutX="191.0" layoutY="242.0" />
+         </children>
+      </Pane>
+   </children>
+</Pane>
