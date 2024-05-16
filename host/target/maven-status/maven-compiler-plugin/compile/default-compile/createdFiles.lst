@@ -1,5 +1,5 @@
 module-info.class
 br\edu\fesa\host\App.class
-br\edu\fesa\host\loginController.class
 br\edu\fesa\host\SecondaryController.class
+br\edu\fesa\host\model\Usuario.class
 br\edu\fesa\host\PrimaryController.class

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.fesa.host.loginController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.fesa.host.LoginController">
    <children>
       <ImageView fitHeight="768" fitWidth="1024" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -27,7 +27,7 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <TextField fx:id="txtCPF" layoutX="50.0" layoutY="138.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-pref-width: 375; -fx-pref-height: 29;" />
+            <TextField fx:id="txtCPF" layoutX="59.0" layoutY="134.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-pref-width: 375; -fx-pref-height: 29;" styleClass="input-field" stylesheets="@../styles/login.css" />
             <Label layoutX="55.0" layoutY="104.0" prefHeight="30.0" prefWidth="36.0" text="CPF" textFill="#5073b7">
                <font>
                   <Font size="20.0" />
@@ -53,7 +53,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <PasswordField fx:id="txtSenha" layoutX="191.0" layoutY="242.0" />
+            <PasswordField fx:id="txtSenha" layoutX="59.0" layoutY="237.0" styleClass="input-field" stylesheets="@../styles/login.css" />
          </children>
       </Pane>
    </children>
