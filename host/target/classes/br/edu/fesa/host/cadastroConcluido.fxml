@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768" prefWidth="1024.0" stylesheets="@../styles/novaSenha.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.fesa.host.CadastroConcluidoController">
+   <children>
+      <ImageView fitHeight="768" fitWidth="1024" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/fundocadastro.png" />
+         </image>
+         <viewport>
+            <Rectangle2D height="768" width="1024" />
+         </viewport>
+      </ImageView>
+      <Label layoutX="928.0" layoutY="667.0" prefHeight="73.0" prefWidth="112.0" text="Sair" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="178.0" layoutY="107.0" prefHeight="73.0" prefWidth="656.0" text="Seu cadastro foi concluído, clique em continuar:" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Label>
+      <Button layoutX="378.0" layoutY="567.0" mnemonicParsing="false" style="-fx-pref-width: 261; -fx-pref-height: 40; -fx-alignment: center;" styleClass="button-conclued" stylesheets="@../styles/cadastroConcluido.css" text="Continuar" textFill="#821384">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="431.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/Ellipse%209.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="62.0" fitWidth="84.0" layoutX="470.0" layoutY="352.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/Vector.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

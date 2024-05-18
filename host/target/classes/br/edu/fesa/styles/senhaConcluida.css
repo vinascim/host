@@ -1,0 +1,12 @@
+
+.password-size {
+    -fx-background-color:White;
+    -fx-border-radius:50;
+    -fx-background-radius:50;
+    -fx-pref-height:200;
+    -fx-pref-width:800;
+}
+
+.button-conclued {
+    -fx-background-color:White;
+}

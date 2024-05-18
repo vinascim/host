@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -53,12 +54,46 @@ public class LoginController {
             System.out.println("Login bem-sucedido!");
             // Redireciona para a tela home
             redirecionarParaHome();
+            
+            Stage stage = (Stage) txtCPF.getScene().getWindow(); // Substitua txtCPF pelo elemento relevante da cena
+            stage.close();
         } else {
             System.out.println("Credenciais inválidas. Tente novamente.");
             // Exibe uma mensagem de erro na interface de login
             // Aqui você pode implementar uma interface gráfica para exibir a mensagem de erro
         }
     }
+    
+       @FXML
+    private Label btAbrirCadastro;
+
+    @FXML
+    private void initialize() {
+        btAbrirCadastro.setOnMouseClicked(event -> abrirCadastro());
+    }
+
+    private void abrirCadastro() {
+        try {
+            // Carregar o arquivo FXML da tela de cadastro
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("cadastrar.fxml"));
+            Parent root = loader.load();
+            
+            // Criar uma nova cena
+            Scene scene = new Scene(root);
+            
+            // Criar uma nova janela (palco)
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Cadastro"); // Define o título da janela
+            stage.show(); // Exibe a nova janela
+            
+                 Stage stageLogin = (Stage) txtCPF.getScene().getWindow(); // Substitua txtCPF pelo elemento relevante da cena
+        stageLogin.close();
+        } catch (IOException e) {
+            e.printStackTrace(); // Tratar exceção adequadamente
+        }
+    }
+    
     // Método para validar o CPF usando regex
     private boolean isValidCPF(String cpf) {
         String regex = "\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}";
@@ -88,4 +123,6 @@ public class LoginController {
         stage.setScene(scene);
         stage.show();
     }
+    
+
 }

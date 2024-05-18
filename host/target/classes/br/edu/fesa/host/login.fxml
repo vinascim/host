@@ -48,7 +48,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Label layoutX="191.0" layoutY="388.0" prefHeight="30.0" prefWidth="93.0" text="Cadastrar" textFill="#914bc3">
+            <Label fx:id="btAbrirCadastro" layoutX="191.0" layoutY="388.0" prefHeight="30.0" prefWidth="93.0" text="Cadastrar" textFill="#914bc3">
                <font>
                   <Font size="20.0" />
                </font>

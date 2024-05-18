@@ -19,6 +19,8 @@ public class Usuario {
     private String recoveryQST; // Pergunta de recuperação
     private String recoveryANS; // Resposta de recuperação
 
+    public Usuario(){}
+    
     // Construtor
     public Usuario(String cpf, String nome, LocalDate dataNascimento, String email, String senha, String recoveryQST, String recoveryANS) {
         this.cpf = cpf;
