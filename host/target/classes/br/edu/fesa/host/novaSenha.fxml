@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768" prefWidth="1024.0" stylesheets="@../styles/novaSenha.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.fesa.host.loginController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768" prefWidth="1024.0" stylesheets="@../styles/novaSenha.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.fesa.host.NovaSenhaController">
    <children>
       <ImageView fitHeight="768" fitWidth="1024" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -26,8 +26,8 @@
                   <Font name="System Bold" size="29.0" />
                </font>
             </Label>
-            <TextField fx:id="txtCPF" layoutX="114.0" layoutY="95.0" prefWidth="487.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-pref-width: 550; -fx-pref-height: 29;" styleClass="input-field" />
-            <Button layoutX="270.0" layoutY="145.0" mnemonicParsing="false" onAction="#btEntrar" style="-fx-pref-width: 261; -fx-pref-height: 40; -fx-background-color: #914bc3; -fx-alignment: center;" text="Prosseguir" textFill="WHITE">
+            <TextField fx:id="txtNovaSenha" layoutX="114.0" layoutY="95.0" prefWidth="487.0" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-pref-width: 550; -fx-pref-height: 29;" styleClass="input-field" />
+            <Button layoutX="270.0" layoutY="145.0" mnemonicParsing="false" onAction="#btNovaSenha" style="-fx-pref-width: 261; -fx-pref-height: 40; -fx-background-color: #914bc3; -fx-alignment: center;" text="Prosseguir" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>

@@ -38,7 +38,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="55.0" layoutY="276.0" prefHeight="30.0" prefWidth="148.0" text="Esqueceu a senha?" textFill="#914bc3">
+            <Label fx:id="esqueceuSenha" layoutX="55.0" layoutY="276.0" prefHeight="30.0" prefWidth="148.0" text="Esqueceu a senha?" textFill="#914bc3">
                <font>
                   <Font size="17.0" />
                </font>

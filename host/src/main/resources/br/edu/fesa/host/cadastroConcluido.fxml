@@ -28,7 +28,7 @@
             <Font name="System Bold" size="29.0" />
          </font>
       </Label>
-      <Button layoutX="378.0" layoutY="567.0" mnemonicParsing="false" style="-fx-pref-width: 261; -fx-pref-height: 40; -fx-alignment: center;" styleClass="button-conclued" stylesheets="@../styles/cadastroConcluido.css" text="Continuar" textFill="#821384">
+      <Button layoutX="378.0" layoutY="567.0" mnemonicParsing="false" onAction="#btContinuar" style="-fx-pref-width: 261; -fx-pref-height: 40; -fx-alignment: center;" styleClass="button-conclued" stylesheets="@../styles/cadastroConcluido.css" text="Continuar" textFill="#821384">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

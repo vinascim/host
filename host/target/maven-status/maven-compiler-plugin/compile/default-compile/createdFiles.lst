@@ -11,7 +11,6 @@ br\edu\fesa\host\CadastroConcluidoController.class
 br\edu\fesa\host\model\Convidado.class
 br\edu\fesa\host\model\Evento.class
 br\edu\fesa\host\model\Despesa.class
-br\edu\fesa\host\CadastroController.class
 br\edu\fesa\host\controller\HomeController.class
 br\edu\fesa\host\dao\GenericoDAO.class
 br\edu\fesa\host\model\Usuario.class
