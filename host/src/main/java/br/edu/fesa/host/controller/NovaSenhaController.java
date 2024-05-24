@@ -1,5 +1,6 @@
-package br.edu.fesa.host;
+package br.edu.fesa.host.controller;
 
+import br.edu.fesa.host.App;
 import br.edu.fesa.host.dao.UsuarioDAO;
 import br.edu.fesa.host.model.Usuario;
 import java.io.IOException;
@@ -10,15 +11,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 public class NovaSenhaController {
-    
+
     @FXML
     private TextField txtNovaSenha;
-    
-    private String cpf; // Variável de classe para armazenar o CPF
+
+    private String cpf;
 
     private UsuarioDAO usuarioDAO;
 
-    // Método getter e setter para o CPF
     public String getCpf() {
         return cpf;
     }
@@ -28,37 +28,37 @@ public class NovaSenhaController {
     }
 
     public NovaSenhaController() {
-        this.usuarioDAO = new UsuarioDAO(); // Inicializa o DAO
+        this.usuarioDAO = new UsuarioDAO();
     }
-    
+
     @FXML
     private void btNovaSenha() {
-        String cpf = getCpf();  
-        String novaSenha = txtNovaSenha.getText();
+        try {
+            String cpf = getCpf();
+            String novaSenha = txtNovaSenha.getText();
 
-        // Verifica se a nova senha não está vazia
-        if (novaSenha.isEmpty()) {
-            showAlert("Erro", "A nova senha não pode estar vazia.");
-            return;
+            if (novaSenha.isEmpty()) {
+                showAlert("Erro", "A nova senha não pode estar vazia.");
+                return;
+            }
+
+            String senhaCriptografada = hashPassword(novaSenha);
+
+            Usuario usuario = usuarioDAO.buscarPorCPF(cpf);
+
+            if (usuario == null) {
+                showAlert("Erro", "Usuário não encontrado.");
+                return;
+            }
+
+            usuario.setSenha(senhaCriptografada);
+            usuarioDAO.alterar(usuario);
+            App.setRoot("login");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        // Criptografa a nova senha
-        String senhaCriptografada = hashPassword(novaSenha);
-
-        Usuario usuario = usuarioDAO.buscarPorCPF(cpf);
-        System.out.println(cpf);
-        if (usuario == null) {
-            showAlert("Erro", "Usuário não encontrado.");
-            return;
-        }
-
-        usuario.setSenha(senhaCriptografada);
-        usuarioDAO.alterar(usuario);
-
-        showAlert("Sucesso", "Senha alterada com sucesso.");
     }
 
-    // Método para mostrar um alerta
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);

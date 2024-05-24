@@ -1,26 +1,21 @@
-package br.edu.fesa.host;
+package br.edu.fesa.host.controller;
 
+import br.edu.fesa.host.App;
 import br.edu.fesa.host.model.Usuario;
 import br.edu.fesa.host.dao.UsuarioDAO;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
-import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 public class CadastroController {
 
@@ -47,7 +42,6 @@ public class CadastroController {
 
     @FXML
     private void initialize() {
-        // Configura os itens da ComboBox
         txtRecoveryQST.setItems(FXCollections.observableArrayList(
                 "Qual é a tradição familiar favorita?",
                 "Qual foi o seu primeiro emprego?",
@@ -95,9 +89,18 @@ public class CadastroController {
                 return;
             }
 
+            if (!isValidPassword(senha)) {
+                showAlert("Erro", "Senha não segue os requisitos.");
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                showAlert("Erro", "O formato do email é inválido.");
+                return;
+            }
+
             String senhaCriptografada = hashPassword(senha);
 
-            // Cria o objeto Usuario
             Usuario usuario = new Usuario();
             usuario.setCpf(cpf);
             usuario.setNome(nome);
@@ -107,13 +110,11 @@ public class CadastroController {
             usuario.setRecoveryQST(recoveryQST);
             usuario.setRecoveryANS(recoveryANS);
 
-            // Salva o usuário no banco de dados
             usuarioDAO.inserir(usuario);
 
             AbrirTelaCadastroConfirmado();
 
         } catch (Exception e) {
-            // Handle the NullPointerException
             showAlert("Erro", "Erro:" + e);
         }
     }
@@ -125,7 +126,13 @@ public class CadastroController {
         return matcher.matches();
     }
 
-    // Método para exibir um alerta
+    private boolean isValidEmail(String email) {
+        String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?!.*\\.com\\.)[a-zA-Z0-9-]+(\\.[a-zA-Z]{2,7})$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -134,7 +141,7 @@ public class CadastroController {
         alert.showAndWait();
     }
 
-      private String hashPassword(String password) {
+    private String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hash = md.digest(password.getBytes());
@@ -152,25 +159,18 @@ public class CadastroController {
         }
     }
 
+    private boolean isValidPassword(String password) {
+        String regex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
+    }
+
     private void AbrirTelaCadastroConfirmado() {
         try {
-            // Carregar o arquivo FXML da tela de cadastro
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("cadastroConcluido.fxml"));
-            Parent root = loader.load();
-
-            // Criar uma nova cena
-            Scene scene = new Scene(root);
-
-            // Criar uma nova janela (palco)
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Cadastro concluído!"); // Define o título da janela
-            stage.show(); // Exibe a nova janela
-
-            Stage stageCadastro = (Stage) txtCPF.getScene().getWindow(); // Substitua txtCPF pelo elemento relevante da cena
-            stageCadastro.close();
+            App.setRoot("cadastroConcluido");
         } catch (IOException e) {
-            e.printStackTrace(); // Tratar exceção adequadamente
+            e.printStackTrace();
         }
     }
 

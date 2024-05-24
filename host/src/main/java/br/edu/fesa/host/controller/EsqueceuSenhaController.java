@@ -1,5 +1,6 @@
-package br.edu.fesa.host;
+package br.edu.fesa.host.controller;
 
+import br.edu.fesa.host.App;
 import br.edu.fesa.host.dao.UsuarioDAO;
 import br.edu.fesa.host.model.Usuario;
 import java.io.IOException;
@@ -25,20 +26,16 @@ public class EsqueceuSenhaController {
     @FXML
     private Label txtRecoveryQST;
 
-
     private UsuarioDAO usuarioDAO;
 
-   
-
     public EsqueceuSenhaController() {
-        this.usuarioDAO = new UsuarioDAO(); // Inicializa o DAO
+        this.usuarioDAO = new UsuarioDAO();
     }
 
     @FXML
     private void initialize() {
-        // Adiciona um listener ao campo CPF para que a busca seja realizada quando o usuário terminar de digitar
         txtCPF.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) { // Quando o campo perde o foco
+            if (!newValue) {
                 buscarRecoveryANS(txtCPF.getText());
             }
         });
@@ -58,30 +55,24 @@ public class EsqueceuSenhaController {
         String cpf = txtCPF.getText();
         String recoveryANS = txtRecoveryANS.getText();
 
-        // Verifica se o CPF e a resposta de recuperação foram preenchidos
         if (cpf.isEmpty() || recoveryANS.isEmpty()) {
             showAlert("Erro", "CPF e resposta de recuperação devem ser preenchidos.");
             return;
         }
 
-        // Busca o usuário no banco de dados pelo CPF
         Usuario usuario = usuarioDAO.buscarPorCPF(cpf);
 
         if (usuario != null && usuario.getRecoveryANS().equals(recoveryANS)) {
-            // A resposta de recuperação está correta, abre a nova tela
             abrirNovaTela();
         } else {
             showAlert("Erro", "Resposta de recuperação incorreta.");
         }
     }
 
-   
-
     private void abrirNovaTela() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("novaSenha.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/edu/fesa/host/novaSenha.fxml"));
         Parent root = loader.load();
 
-        // Passar o CPF para o controlador da nova tela
         NovaSenhaController novaSenhaController = loader.getController();
         novaSenhaController.setCpf(txtCPF.getText());
 
@@ -92,7 +83,6 @@ public class EsqueceuSenhaController {
         stage.show();
     }
 
-    // Implementação do método showAlert
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
