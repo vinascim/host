@@ -18,11 +18,6 @@
             <Rectangle2D height="768" width="1024" />
          </viewport>
       </ImageView>
-      <Label layoutX="928.0" layoutY="667.0" prefHeight="73.0" prefWidth="112.0" text="Sair" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
       <Label layoutX="178.0" layoutY="107.0" prefHeight="73.0" prefWidth="656.0" text="Seu cadastro foi concluído, clique em continuar:" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="29.0" />

@@ -43,7 +43,10 @@ public class LoginController {
         Usuario usuario = usuarioDAO.buscarPorCPF(cpf);
 
         if (usuario != null && usuario.getSenha().equals(hashedPassword)) {
-            redirecionarParaHome();
+            // Salva o CPF no Singleton
+            Usuario.getInstance().setUsuarioCpf(cpf);
+
+            redirecionarParaHome(cpf);
         } else {
             showAlert("Erro", "Credenciais inválidas.");
         }
@@ -104,7 +107,10 @@ public class LoginController {
         }
     }
 
-    private void redirecionarParaHome() throws IOException {
+    private void redirecionarParaHome(String cpf) throws IOException {
+        HomeController controller = new HomeController();
+        //controller.initialize(cpf);
         App.setRoot("home");
     }
+
 }

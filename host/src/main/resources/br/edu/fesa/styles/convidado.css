@@ -1,0 +1,9 @@
+
+.box-size {
+    -fx-background-color:White;
+    -fx-border-radius:50;
+    -fx-background-radius:50;
+    -fx-pref-height:500;
+    -fx-pref-width:450;
+}
+

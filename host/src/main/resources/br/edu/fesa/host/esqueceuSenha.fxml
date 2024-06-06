@@ -45,10 +45,5 @@
             </Label>
          </children>
       </Pane>
-      <Label layoutX="928.0" layoutY="667.0" prefHeight="73.0" prefWidth="112.0" text="Sair" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
    </children>
 </Pane>

@@ -4,6 +4,8 @@
  */
 package br.edu.fesa.host.model;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author victo
@@ -11,13 +13,17 @@ package br.edu.fesa.host.model;
 public class Convidado {
     private String cpf;
     private String nome;
-    private int idade;
+    private LocalDate idade;
     private boolean flComida;
     private boolean flBebida;
     private boolean flBebidaAlcoolica;
     private boolean flOutros;
+    private int evento; // Alterado para int
+    private boolean flPago;
 
-    public Convidado(String cpf, String nome, int idade, boolean flComida, boolean flBebida, boolean flBebidaAlcoolica, boolean flOutros) {
+    public Convidado(){}
+    
+    public Convidado( String cpf, String nome, LocalDate idade, boolean flComida, boolean flBebida, boolean flBebidaAlcoolica, boolean flOutros, int evento, boolean flPago) {
         this.cpf = cpf;
         this.nome = nome;
         this.idade = idade;
@@ -25,6 +31,24 @@ public class Convidado {
         this.flBebida = flBebida;
         this.flBebidaAlcoolica = flBebidaAlcoolica;
         this.flOutros = flOutros;
+        this.evento = evento;
+        this.flPago = flPago;
+    }
+
+    public boolean isFlPago() {
+        return flPago;
+    }
+
+    public void setFlPago(boolean flPago) {
+        this.flPago = flPago;
+    }
+
+    public int getEvento() {
+        return evento;
+    }
+
+    public void setEvento(int evento) {
+        this.evento = evento;
     }
 
     // Getters e Setters aqui
@@ -45,11 +69,11 @@ public class Convidado {
         this.nome = nome;
     }
 
-    public int getIdade() {
+    public LocalDate getIdade() {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(LocalDate idade) {
         this.idade = idade;
     }
 

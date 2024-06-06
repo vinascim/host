@@ -19,6 +19,9 @@ public class Usuario {
     private String recoveryQST; // Pergunta de recuperação
     private String recoveryANS; // Resposta de recuperação
 
+    private static Usuario instance;
+    private String usuarioCpf;
+    
     public Usuario(){}
     
     // Construtor
@@ -32,6 +35,21 @@ public class Usuario {
         this.recoveryANS = recoveryANS;
     }
 
+       public static Usuario getInstance() {
+        if (instance == null) {
+            instance = new Usuario();
+        }
+        return instance;
+    }
+
+    public String getUsuarioCpf() {
+        return usuarioCpf;
+    }
+
+    public void setUsuarioCpf(String usuarioCpf) {
+        this.usuarioCpf = usuarioCpf;
+    }
+    
     // Getters e Setters
     public String getCpf() {
         return cpf;

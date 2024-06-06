@@ -1,34 +1,50 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.fesa.host.model;
 
-/**
- *
- * @author victo
- */
 import java.util.Date;
 
 public class Evento {
+    private int id;
+    private String usuarioCpf;
     private String nome;
     private Date inicio;
     private Date fim;
-    private String local;
+    private String endereco;
     private int lotacao;
     private double valor;
     private String descricao;
 
-    public Evento(String nome, Date inicio, Date fim, String local, int lotacao, double valor, String descricao) {
+    // Construtores
+    public Evento() {
+    }
+
+    public Evento(int id, String usuarioCpf, String nome, Date inicio, Date fim, String endereco, int lotacao, double valor, String descricao) {
+        this.id = id;
+        this.usuarioCpf = usuarioCpf;
         this.nome = nome;
         this.inicio = inicio;
         this.fim = fim;
-        this.local = local;
+        this.endereco = endereco;
         this.lotacao = lotacao;
         this.valor = valor;
         this.descricao = descricao;
     }
 
+    // Getters e Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsuarioCpf() {
+        return usuarioCpf;
+    }
+
+    public void setUsuarioCpf(String usuarioCpf) {
+        this.usuarioCpf = usuarioCpf;
+    }
 
     public String getNome() {
         return nome;
@@ -54,12 +70,12 @@ public class Evento {
         this.fim = fim;
     }
 
-    public String getLocal() {
-        return local;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public int getLotacao() {
@@ -85,6 +101,4 @@ public class Evento {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
-
 }

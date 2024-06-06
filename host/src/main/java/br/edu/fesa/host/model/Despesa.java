@@ -1,25 +1,35 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.fesa.host.model;
 
-/**
- *
- * @author victo
- */
 public class Despesa {
-    private String nome;
-    private String categoria;
-    private double valor;
 
-    public Despesa(String nome, String categoria, double valor) {
+    private int idEvento;
+    private int idCategoria;
+    private String nome;
+    private double valor;
+    private CategoriaDespesa categoria; 
+
+    public Despesa(int idEvento, int idCategoria, String nome, double valor) {
+        this.idEvento = idEvento;
+        this.idCategoria = idCategoria;
         this.nome = nome;
-        this.categoria = categoria;
         this.valor = valor;
     }
 
-    // Getters e Setters aqui
+    public int getIdEvento() {
+        return idEvento;
+    }
+
+    public void setIdEvento(int idEvento) {
+        this.idEvento = idEvento;
+    }
+
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
+    }
 
     public String getNome() {
         return nome;
@@ -27,14 +37,6 @@ public class Despesa {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
     }
 
     public double getValor() {
@@ -45,5 +47,11 @@ public class Despesa {
         this.valor = valor;
     }
 
-    
+    public CategoriaDespesa getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriaDespesa categoria) {
+        this.categoria = categoria;
+    }
 }
