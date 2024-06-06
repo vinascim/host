@@ -80,14 +80,14 @@ public class ConvidadoController {
         loadConvidados();
         tableViewConvidados.setOnMouseClicked(this::handleTableViewClicked);
         dpIdade.valueProperty().addListener((observable, oldValue, newValue) -> {
-        if (newValue != null) {
-            int idade = calcularIdade(newValue);
-            chkBebidaAlcoolica.setDisable(idade < 18);
-            if (idade < 18 && chkBebidaAlcoolica.isSelected()) {
-                chkBebidaAlcoolica.setSelected(false);
+            if (newValue != null) {
+                int idade = calcularIdade(newValue);
+                chkBebidaAlcoolica.setDisable(idade < 18);
+                if (idade < 18 && chkBebidaAlcoolica.isSelected()) {
+                    chkBebidaAlcoolica.setSelected(false);
+                }
             }
-        }
-    });
+        });
     }
 
     private void setupTableView() {
@@ -118,21 +118,27 @@ public class ConvidadoController {
     private void handleTableViewClicked(MouseEvent event) {
         Convidado convidadoSelecionado = tableViewConvidados.getSelectionModel().getSelectedItem();
         if (convidadoSelecionado != null) {
-            txtNomeConvidado.setText(convidadoSelecionado.getNome());
-            dpIdade.setValue(convidadoSelecionado.getIdade());
-            txtCpf.setText(convidadoSelecionado.getCpf());
-            chkComidas.setSelected(convidadoSelecionado.isFlComida());
-            chkBebidaSemAlcool.setSelected(convidadoSelecionado.isFlBebida());
-            chkOutros.setSelected(convidadoSelecionado.isFlOutros());
-            chkPago.setSelected(convidadoSelecionado.isFlPago());
+            // Buscar o convidado atualizado pelo CPF no banco de dados
+            Convidado convidadoAtualizado = convidadoDAO.buscarPorCpf(convidadoSelecionado.getCpf());
 
-            // Verificar idade do convidado para habilitar/desabilitar o checkbox de bebida alcoólica
-            if (convidadoSelecionado.getIdade() != null) {
-                if (calcularIdade(convidadoSelecionado.getIdade()) < 18) {
-                    chkBebidaAlcoolica.setSelected(false);
-                    chkBebidaAlcoolica.setDisable(true);
-                } else {
-                    chkBebidaAlcoolica.setDisable(false);
+            if (convidadoAtualizado != null) {
+                // Preencher os campos do formulário com os dados atualizados
+                txtNomeConvidado.setText(convidadoAtualizado.getNome());
+                dpIdade.setValue(convidadoAtualizado.getIdade());
+                txtCpf.setText(convidadoAtualizado.getCpf());
+                chkComidas.setSelected(convidadoAtualizado.isFlComida());
+                chkBebidaSemAlcool.setSelected(convidadoAtualizado.isFlBebida());
+                chkOutros.setSelected(convidadoAtualizado.isFlOutros());
+                chkPago.setSelected(convidadoAtualizado.isFlPago());
+                chkBebidaAlcoolica.setSelected(convidadoAtualizado.isFlBebidaAlcoolica());
+                // Verificar idade do convidado para habilitar/desabilitar o checkbox de bebida alcoólica
+                if (convidadoAtualizado.getIdade() != null) {
+                    if (calcularIdade(convidadoAtualizado.getIdade()) < 18) {
+                        chkBebidaAlcoolica.setSelected(false);
+                        chkBebidaAlcoolica.setDisable(true);
+                    } else {
+                        chkBebidaAlcoolica.setDisable(false);
+                    }
                 }
             }
         }
@@ -218,28 +224,64 @@ public class ConvidadoController {
 
     private double calcularValorPagar(Convidado convidado) {
         double valorPagar = 0.0;
-        double totalComida = convidado.isFlComida() ? calcularTotalDespesasPorTipo(1) : 0.0;
-        double totalBebidaSemAlcool = convidado.isFlBebida() ? calcularTotalDespesasPorTipo(2) : 0.0;
-        double totalBebidaAlcoolica = convidado.isFlBebidaAlcoolica() ? calcularTotalDespesasPorTipo(3) : 0.0;
-        double totalOutros = convidado.isFlOutros() ? calcularTotalDespesasPorTipo(4) : 0.0;
 
-        int totalConvidados = tableViewConvidados.getItems().size();
-        if (totalConvidados > 0) {
-            valorPagar = (totalComida + totalBebidaSemAlcool + totalBebidaAlcoolica + totalOutros) / totalConvidados;
+        // Verificar se o convidado entra em cada categoria e calcular o valor proporcional
+        if (convidado.isFlComida()) {
+            valorPagar += calcularValorProporcionalPorCategoria(1);
+        }
+        if (convidado.isFlBebida()) {
+            valorPagar += calcularValorProporcionalPorCategoria(2);
+        }
+        if (convidado.isFlBebidaAlcoolica()) {
+            valorPagar += calcularValorProporcionalPorCategoria(3);
+        }
+        if (convidado.isFlOutros()) {
+            valorPagar += calcularValorProporcionalPorCategoria(4);
         }
 
         return valorPagar;
     }
 
-    private double calcularTotalDespesas(int eventoId) {
-        double total = 0.0;
-        List<Despesa> despesas = despesaDAO.listar();
-        for (Despesa despesa : despesas) {
-            if (despesa.getIdEvento() == eventoId) {
-                total += despesa.getValor();
+    private double calcularValorProporcionalPorCategoria(int categoria) {
+        double totalDespesas = calcularTotalDespesasPorTipo(categoria);
+        int totalConvidadosNaCategoria = contarConvidadosNaCategoria(categoria);
+
+        if (totalConvidadosNaCategoria > 0) {
+            return totalDespesas / totalConvidadosNaCategoria;
+        }
+
+        return 0.0;
+    }
+
+    private int contarConvidadosNaCategoria(int categoria) {
+        int count = 0;
+
+        for (Convidado convidado : tableViewConvidados.getItems()) {
+            switch (categoria) {
+                case 1:
+                    if (convidado.isFlComida()) {
+                        count++;
+                    }
+                    break;
+                case 2:
+                    if (convidado.isFlBebida()) {
+                        count++;
+                    }
+                    break;
+                case 3:
+                    if (convidado.isFlBebidaAlcoolica()) {
+                        count++;
+                    }
+                    break;
+                case 4:
+                    if (convidado.isFlOutros()) {
+                        count++;
+                    }
+                    break;
             }
         }
-        return total;
+
+        return count;
     }
 
     private double calcularTotalDespesasPorTipo(int tipo) {
